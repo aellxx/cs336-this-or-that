@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
 import { ResultPageComponent } from './pages/result-page/result-page.component';
+import { AngularFireModule } from '@angular/fire/compat'; 
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +18,9 @@ import { ResultPageComponent } from './pages/result-page/result-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),    
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
