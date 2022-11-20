@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "this-or-that-b60b4": {
+      "hosting": {
+        "thisOrThat": [
+          "this-or-that-b60b4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "this-or-that-b60b4"
+  }
+}
