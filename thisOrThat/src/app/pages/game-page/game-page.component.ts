@@ -14,4 +14,11 @@ export class GamePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  firstImgClicked() {
+    console.log("first image clicked");
+  }
+
+  secondImgClicked() {
+    console.log("second image clicked");
+  }
 }
