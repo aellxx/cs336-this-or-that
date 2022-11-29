@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface ImageRec {
   imageUrl: string;
-  name: string;
+  imageId: number;
 }
 
 @Injectable({
