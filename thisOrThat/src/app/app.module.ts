@@ -8,6 +8,8 @@ import { ResultPageComponent } from './pages/result-page/result-page.component';
 import { AngularFireModule } from '@angular/fire/compat'; 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),    
-    AngularFirestoreModule
+    AngularFirestoreModule, BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
