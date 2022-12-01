@@ -13,6 +13,7 @@ export class GamePageComponent implements OnInit {
   chosenImages: ImageRec[] = [];
 
   gameOver: boolean = false;
+  currentRound: number = 16;
 
   startIdx = 0;
   endIdx = 2;
@@ -56,5 +57,6 @@ export class GamePageComponent implements OnInit {
     // reset index
     this.startIdx = 0;
     this.endIdx = 2;
+    this.currentRound = this.imageArr.length;
   }
 }
