@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PhotoContainerComponent } from './components/photo-container/photo-container.component';
 
@@ -27,6 +28,7 @@ import { PhotoContainerComponent } from './components/photo-container/photo-cont
     AngularFirestoreModule, BrowserAnimationsModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
