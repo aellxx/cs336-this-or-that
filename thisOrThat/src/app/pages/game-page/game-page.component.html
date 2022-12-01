@@ -21,7 +21,10 @@
   </mat-menu>
 </mat-toolbar>
 <div class="grid-container">
-  <div class="img-container" *ngFor="let sample of sampleImg">
-    <img [src]="sample.imageUrl" [alt]="sample.imageId" (click)="onClick()"/>
+  <div class="img-container" *ngFor="let cp of currentPair; let i = index">
+    <img 
+        [src]="cp.imageUrl" 
+        [alt]="cp.imageId" 
+        (click)="onChooseImage(i)"/>
   </div>
 </div>
