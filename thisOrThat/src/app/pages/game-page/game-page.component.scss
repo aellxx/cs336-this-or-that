@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.grid-container {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    height: 93.5vh;
+
+    .img-container {
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 65%;
+        }
+    }
+    
+}

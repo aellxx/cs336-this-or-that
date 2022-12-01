@@ -1,3 +1,27 @@
-<app-photo-container></app-photo-container>
-<p>this works!</p>
-
+<mat-toolbar>
+  <span>Game</span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon"
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Quit and Return Home</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>cancel</mat-icon>
+      <span>Resume Game</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<div class="grid-container">
+  <div class="img-container" *ngFor="let sample of sampleImg">
+    <img [src]="sample.imageUrl" [alt]="sample.imageId" (click)="onClick()"/>
+  </div>
+</div>

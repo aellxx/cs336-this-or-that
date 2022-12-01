@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PhotoContainerComponent } from 'src/app/components/photo-container/photo-container.component';
 
 @Component({
   selector: 'app-home-page',
