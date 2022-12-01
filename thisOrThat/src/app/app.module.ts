@@ -10,13 +10,15 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PhotoContainerComponent } from './components/photo-container/photo-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GamePageComponent,
-    ResultPageComponent
+    ResultPageComponent,
+    PhotoContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
     AngularFireModule.initializeApp(environment.firebase),    
     AngularFirestoreModule, BrowserAnimationsModule,
     MatButtonModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
