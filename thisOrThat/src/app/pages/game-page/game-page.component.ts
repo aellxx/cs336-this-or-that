@@ -10,9 +10,9 @@ import { ImageRec } from 'src/app/services/data.service';
 export class GamePageComponent implements OnInit {
   imageArr: ImageRec[] = [];
   currentPair: ImageRec[] = [];
-  chosenImage: ImageRec[] = [];
+  chosenImages: ImageRec[] = [];
 
-  roundFinished: boolean = false;
+  gameOver: boolean = false;
 
   startIdx = 0;
   endIdx = 2;
@@ -31,22 +31,30 @@ export class GamePageComponent implements OnInit {
     if (this.startIdx < this.imageArr.length) {
       console.log(this.startIdx, this.endIdx);
       // add to chosen images
-      this.chosenImage.push(this.currentPair[i]);
+      this.chosenImages.push(this.currentPair[i]);
       // update indices
       this.startIdx = this.endIdx;
       this.endIdx += 2;
       // render next pair
       this.currentPair = this.imageArr.slice(this.startIdx, this.endIdx);
 
-      if (this.chosenImage.length * 2 === this.imageArr.length) {
-        console.log('reset mode!!');
-        this.imageArr = [...this.chosenImage];
-        console.log(this.imageArr);
-        this.chosenImage = this.imageArr.slice(0, 2);
-        this.currentPair = [];
-        this.startIdx = 0;
-        this.endIdx = 2;
+      // reset for next round
+      if (this.chosenImages.length * 2 === this.imageArr.length) {
+        if (this.chosenImages.length === 1) {
+          this.gameOver = !this.gameOver;
+        } else {
+          this.setNewRound();
+        }
       }
     }
   };
+
+  setNewRound = ()  => {
+    this.imageArr = [...this.chosenImages];
+    this.chosenImages = [];
+    this.currentPair = this.imageArr.slice(0, 2);
+    // reset index
+    this.startIdx = 0;
+    this.endIdx = 2;
+  }
 }
