@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { ImageRec } from 'src/app/services/data.service';
 
@@ -12,6 +13,9 @@ export class GamePageComponent implements OnInit {
   imageArr: ImageRec[] = [];
   currentPair: ImageRec[] = [];
   chosenImages: ImageRec[] = [];
+  top3Records: ImageRec[] = [];
+
+  chosenImage$: BehaviorSubject<ImageRec> = new BehaviorSubject<ImageRec>({imageUrl: "", imageId: -1, winCount: 0});
 
   gameOver: boolean = false;
   currentRound: number = 16;
@@ -45,6 +49,11 @@ export class GamePageComponent implements OnInit {
       if (this.chosenImages.length * 2 === this.imageArr.length) {
         if (this.chosenImages.length === 1) {
           this.gameOver = !this.gameOver;
+          this.dataSvc.updateWinCount(this.chosenImages[0]);
+          this.dataSvc.top3Records$.subscribe((res) => {
+            this.top3Records = res;
+            console.log(this.top3Records);
+          })
         } else {
           this.setNewRound();
         }

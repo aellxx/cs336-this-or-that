@@ -31,4 +31,5 @@
 </div>
 <div *ngIf="gameOver">
   <app-result [favoriteImg]="chosenImages[0]"></app-result>
+  <div *ngFor="let rec of top3Records">{{rec.imageUrl}} {{rec.imageId}}</div>
 </div>
