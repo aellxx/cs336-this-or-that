@@ -20,7 +20,7 @@
     </button>
   </mat-menu>
 </mat-toolbar>
-<div class="grid-container">
+<div class="grid-container" *ngIf="!gameOver">
   <div class="img-container" *ngFor="let cp of currentPair; let i = index">
     <img 
         [src]="cp.imageUrl" 
@@ -28,4 +28,7 @@
         (click)="onChooseImage(i)"/>
   </div>
   <p>Round of {{currentRound}}</p>
+</div>
+<div *ngIf="gameOver">
+  <app-result [favoriteImg]="chosenImages[0]"></app-result>
 </div>

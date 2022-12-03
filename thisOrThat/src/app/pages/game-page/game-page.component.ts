@@ -6,6 +6,7 @@ import { ImageRec } from 'src/app/services/data.service';
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.scss'],
+
 })
 export class GamePageComponent implements OnInit {
   imageArr: ImageRec[] = [];
@@ -25,7 +26,8 @@ export class GamePageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onChooseImage = (i: number): void => {
     // Play round
@@ -50,7 +52,7 @@ export class GamePageComponent implements OnInit {
     }
   };
 
-  setNewRound = ()  => {
+  setNewRound = () => {
     this.imageArr = [...this.chosenImages];
     this.chosenImages = [];
     this.currentPair = this.imageArr.slice(0, 2);
@@ -58,5 +60,5 @@ export class GamePageComponent implements OnInit {
     this.startIdx = 0;
     this.endIdx = 2;
     this.currentRound = this.imageArr.length;
-  }
+  };
 }
