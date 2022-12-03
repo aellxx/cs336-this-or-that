@@ -1,17 +1,34 @@
-<div class="game-container">
-    <div class="split first-image-container" (click)="firstImgClicked()">
-        <div class="centered">
-            <p>
-                Dog
-            </p>
-        </div>
-    </div>
-    <div class="split second-image-container" (click)="secondImgClicked()">
-        <div class="centered" >
-            <p>
-                Cat
-            </p>
-        </div>
-    </div>
+<mat-toolbar>
+  <span>Game</span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon"
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Quit and Return Home</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>cancel</mat-icon>
+      <span>Resume Game</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<div class="grid-container" *ngIf="!gameOver">
+  <div class="img-container" *ngFor="let cp of currentPair; let i = index">
+    <img 
+        [src]="cp.imageUrl" 
+        [alt]="cp.imageId" 
+        (click)="onChooseImage(i)"/>
+  </div>
+  <p>Round of {{currentRound}}</p>
 </div>
-
+<div *ngIf="gameOver">
+  <app-result [favoriteImg]="chosenImages[0]"></app-result>
+</div>
