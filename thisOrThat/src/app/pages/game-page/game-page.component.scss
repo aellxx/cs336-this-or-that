@@ -2,18 +2,46 @@
     flex: 1 1 auto;
 }
 
+mat-toolbar {
+    // border: 1px solid red;
+    height: 6.5vh;
+
+    .title {}
+
+    .round-text {
+        width: 50%;
+        margin: 0 auto;
+        // border: 1px solid red
+    }
+
+
+}
+
+
 .grid-container {
-    display: grid; 
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: 93.5vh;
 
     .img-container {
-        display: flex; 
+        display: flex;
         justify-content: center;
         align-items: center;
+
         img {
-            width: 65%;
+            width: 100%;
+            height: 93.5vh;
+            object-fit: cover;
         }
     }
-    
+}
+
+.winner-container {
+    height: 93.5vh;
+    width: auto;
+    overflow-y: hidden;
+
+    app-result {
+        background-color: aqua;
+    }
 }

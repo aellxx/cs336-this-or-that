@@ -1,12 +1,8 @@
 <mat-toolbar>
-  <span>Game</span>
+  <span class="title">Game</span>
   <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon"
-    [matMenuTriggerFor]="menu"
-    aria-label="Example icon-button with a menu"
-  >
+  <p class="round-text">Round of {{currentRound}}</p>
+  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -22,14 +18,11 @@
 </mat-toolbar>
 <div class="grid-container" *ngIf="!gameOver">
   <div class="img-container" *ngFor="let cp of currentPair; let i = index">
-    <img 
-        [src]="cp.imageUrl" 
-        [alt]="cp.imageId" 
-        (click)="onChooseImage(i)"/>
+    <img [src]="cp.imageUrl" [alt]="cp.imageId" (click)="onChooseImage(i)" />
   </div>
-  <p>Round of {{currentRound}}</p>
+
 </div>
-<div *ngIf="gameOver">
+<div class="winner-container" *ngIf="gameOver">
   <app-result [favoriteImg]="chosenImages[0]"></app-result>
-  <div *ngFor="let rec of top3Records">{{rec.imageUrl}} {{rec.imageId}}</div>
+  <!-- <div *ngFor="let rec of top3Records">{{rec.imageUrl}} {{rec.imageId}}</div> -->
 </div>
