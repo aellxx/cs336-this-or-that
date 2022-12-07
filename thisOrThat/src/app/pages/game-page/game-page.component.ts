@@ -11,8 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 export class GamePageComponent implements OnInit {
   // loading game
   gameVersion: string = "";
-  imageArr: string[] = [];
-
+  imageList: string[] = [];
   currentPair: string[] = []
   chosenImages: string[] = [];
   gameOver = false;
@@ -21,38 +20,49 @@ export class GamePageComponent implements OnInit {
   endIdx = 2; 
   currentRound = 16;
 
+
   constructor(private actRt: ActivatedRoute, private dataSvc: DataService) {
-    console.log("constructor called!");
     // get the route parameter
     this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
-    // read data
-    this.dataSvc.games$.subscribe((res) => {
+
+    if (localStorage.getItem("imageList")) {
+      this.imageList = JSON.parse(localStorage.getItem("imageList") || "{}");
+    }
+
+    this.currentPair = [...this.imageList].slice(0,2);
+  }
+
+  ngOnInit(): void {
+    this.dataSvc.games$.subscribe(res => {
       if (res) {
-        console.log(res);
-        this.imageArr = res[this.gameVersion];
-        console.log(this.imageArr);
-        console.log(this.imageArr.length);
+        this.imageList = res[this.gameVersion];
+        console.log(this.imageList);
+        console.log(this.imageList[0]);
+        if (!localStorage.getItem("imageList")) {
+          localStorage.setItem("imageList", JSON.stringify(this.imageList));
+        }
       }
     })
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+
   }
 
   onChooseImage = (i: number): void => {
-    console.log(this.imageArr ? this.imageArr.length : null);
+    console.log(this.imageList ? this.imageList.length : null);
     // Play round
-    if (this.imageArr && this.startIdx < this.imageArr.length) {
+    if (this.imageList && this.startIdx < this.imageList.length) {
       // add to chosen images
       this.chosenImages.push(this.currentPair[i]);
       // update indices
       this.startIdx = this.endIdx;
       this.endIdx += 2;
       // render next pair
-      this.currentPair = this.imageArr.slice(2, 4);
+      this.currentPair = this.imageList.slice(2, 4);
 
       // reset for next round
-      if (this.chosenImages.length * 2 === this.imageArr.length) {
+      if (this.chosenImages.length * 2 === this.imageList.length) {
         if (this.chosenImages.length === 1) {
           this.gameOver = !this.gameOver;
           // this.dataSvc.updateWinCount(this.chosenImages[0]);
@@ -67,12 +77,12 @@ export class GamePageComponent implements OnInit {
     }
 
   setNewRound = () => {
-    this.imageArr = [...this.chosenImages];
+    this.imageList = [...this.chosenImages];
     this.chosenImages = [];
-    this.currentPair = this.imageArr.slice(0, 2);
+    this.currentPair = this.imageList.slice(0, 2);
     // reset index
     this.startIdx = 0;
     this.endIdx = 2;
-    this.currentRound = this.imageArr.length;
+    this.currentRound = this.imageList.length;
   };
 };

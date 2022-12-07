@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { Game } from 'src/app/services/data.service';
 
 @Component({
   standalone: true,
