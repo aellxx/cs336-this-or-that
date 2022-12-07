@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ResultPageComponent } from './pages/result-page/result-page.component';
 import { AngularFireModule } from '@angular/fire/compat'; 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
+import {AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PhotoContainerComponent } from './components/photo-container/photo-container.component';
@@ -29,6 +31,8 @@ import { GamePageComponent } from './pages/game-page/game-page.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),    
     AngularFirestoreModule, BrowserAnimationsModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,

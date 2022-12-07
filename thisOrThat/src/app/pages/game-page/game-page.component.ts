@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { ImageRec } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-game-page',
@@ -10,56 +9,62 @@ import { ImageRec } from 'src/app/services/data.service';
 
 })
 export class GamePageComponent implements OnInit {
-  imageArr: ImageRec[] = [];
-  currentPair: ImageRec[] = [];
-  chosenImages: ImageRec[] = [];
-  top3Records: ImageRec[] = [];
+  // loading game
+  gameVersion: string = "";
+  imageArr: string[] = [];
 
-  chosenImage$: BehaviorSubject<ImageRec> = new BehaviorSubject<ImageRec>({imageUrl: "", imageId: -1, winCount: 0});
+  currentPair: string[] = []
+  chosenImages: string[] = [];
+  gameOver = false;
 
-  gameOver: boolean = false;
-  currentRound: number = 16;
+  startIdx = 0; 
+  endIdx = 2; 
+  currentRound = 16;
 
-  startIdx = 0;
-  endIdx = 2;
-
-  constructor(private dataSvc: DataService) {
-    this.dataSvc.imageRecords$.subscribe((res) => {
-      this.imageArr = res;
-      this.currentPair = this.imageArr.slice(0, 2);
-    });
+  constructor(private actRt: ActivatedRoute, private dataSvc: DataService) {
+    console.log("constructor called!");
+    // get the route parameter
+    this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
+    // read data
+    this.dataSvc.games$.subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this.imageArr = res[this.gameVersion];
+        console.log(this.imageArr);
+        console.log(this.imageArr.length);
+      }
+    })
   }
 
   ngOnInit(): void {
   }
 
   onChooseImage = (i: number): void => {
+    console.log(this.imageArr ? this.imageArr.length : null);
     // Play round
-    if (this.startIdx < this.imageArr.length) {
-      console.log(this.startIdx, this.endIdx);
+    if (this.imageArr && this.startIdx < this.imageArr.length) {
       // add to chosen images
       this.chosenImages.push(this.currentPair[i]);
       // update indices
       this.startIdx = this.endIdx;
       this.endIdx += 2;
       // render next pair
-      this.currentPair = this.imageArr.slice(this.startIdx, this.endIdx);
+      this.currentPair = this.imageArr.slice(2, 4);
 
       // reset for next round
       if (this.chosenImages.length * 2 === this.imageArr.length) {
         if (this.chosenImages.length === 1) {
           this.gameOver = !this.gameOver;
-          this.dataSvc.updateWinCount(this.chosenImages[0]);
-          this.dataSvc.top3Records$.subscribe((res) => {
-            this.top3Records = res;
-            console.log(this.top3Records);
-          })
+          // this.dataSvc.updateWinCount(this.chosenImages[0]);
+          // this.dataSvc.top3Records$.subscribe((res) => {
+          //   this.top3Records = res;
+          //   console.log(this.top3Records);
+          }
         } else {
           this.setNewRound();
         }
       }
     }
-  };
 
   setNewRound = () => {
     this.imageArr = [...this.chosenImages];
@@ -70,4 +75,4 @@ export class GamePageComponent implements OnInit {
     this.endIdx = 2;
     this.currentRound = this.imageArr.length;
   };
-}
+};
