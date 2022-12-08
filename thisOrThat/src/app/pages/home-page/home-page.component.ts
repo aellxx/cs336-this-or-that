@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
@@ -10,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  imports: [MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatButtonModule, MatIconModule, CommonModule, MatListModule],
 })
 export class HomePageComponent implements OnInit {
   gameNames: string[] = [];
