@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import {
   getDownloadURL,
   getStorage,
@@ -17,6 +17,7 @@ export interface Game {
 export interface ImageRec {
   imageUrl: string;
   winCount: number;
+  downloadUrl?: string;
 }
 
 @Injectable({
@@ -36,7 +37,16 @@ export class DataService {
       }
     })
     this.getData();
-    
+  }
+
+  getFireStoreData = (folderName: string) => {
+    return this.db.collection<ImageRec>(folderName)
+      .snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        })))
   }
 
 

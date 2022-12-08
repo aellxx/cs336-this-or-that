@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { ImageRec } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-game-page',
@@ -11,38 +12,40 @@ import { DataService } from 'src/app/services/data.service';
 export class GamePageComponent implements OnInit {
   // loading game
   gameVersion: string = "";
-  imageList: string[] = [];
-  currentPair: string[] = []
-  chosenImages: string[] = [];
+  imageList: ImageRec[] = [];
+  currentPair: ImageRec[] = []
+  chosenImages: ImageRec[] = [];
   gameOver = false;
 
   startIdx = 0; 
   endIdx = 2; 
   currentRound = 16;
 
+  imageArr: ImageRec[] = []
+
 
   constructor(private actRt: ActivatedRoute, private dataSvc: DataService) {
     // get the route parameter
     this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
 
-    if (localStorage.getItem("imageList")) {
-      this.imageList = JSON.parse(localStorage.getItem("imageList") || "{}");
-    }
-
-    this.currentPair = [...this.imageList].slice(0,2);
+    this.dataSvc.getFireStoreData(this.gameVersion).subscribe((res) => {
+      this.imageArr = res;
+      console.log(this.imageArr);
+      this.currentPair = this.imageArr.slice(0, 2);
+    })
   }
 
   ngOnInit(): void {
-    this.dataSvc.games$.subscribe(res => {
-      if (res) {
-        this.imageList = res[this.gameVersion];
-        console.log(this.imageList);
-        console.log(this.imageList[0]);
-        if (!localStorage.getItem("imageList")) {
-          localStorage.setItem("imageList", JSON.stringify(this.imageList));
-        }
-      }
-    })
+    // this.dataSvc.games$.subscribe(res => {
+    //   if (res) {
+    //     this.imageList = res[this.gameVersion];
+    //     console.log(this.imageList);
+    //     console.log(this.imageList[0]);
+    //     if (!localStorage.getItem("imageList")) {
+    //       localStorage.setItem("imageList", JSON.stringify(this.imageList));
+    //     }
+    //   }
+    // })
   }
 
   ngOnChanges(): void {
