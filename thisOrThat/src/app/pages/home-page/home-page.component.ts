@@ -31,4 +31,8 @@ export class HomePageComponent implements OnInit {
     // console.log(gameName);
     this.router.navigate(['/game', {gameName: gn}]);
   }
+
+  createGame = (): void => {
+    this.router.navigate(["/uploader"]);
+  }
 }

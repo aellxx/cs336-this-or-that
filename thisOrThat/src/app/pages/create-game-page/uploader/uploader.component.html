@@ -1,0 +1,32 @@
+<mat-form-field class="example-full-width">
+    <mat-label>Title of the game</mat-label>
+    <input matInput placeholder="ex. Norman-Web" [(ngModel)]="game_name">
+</mat-form-field>
+
+
+<div class="upload-button-container">
+    <button mat-raised-button color="primary" (click)="uploadImages()">Upload Images</button>
+</div>
+
+<div class="curr_images">
+    <span>Currently, there are {{ this.files.length }} images</span>
+</div>
+
+<div class="warning-msg-container">
+    <span class="warning-msg" *ngIf="this.images_limit_state">Maximum number of images: 16</span>
+</div>
+
+<div class="warning-msg-container" *ngIf="this.warning_state">
+    <span class="warning-msg">Please, upload exactly 16 images!</span>
+    
+</div>
+
+
+
+<!-- Angular dropzone component for file uplaods: https://www.npmjs.com/package/ngx-dropzone -->
+<ngx-dropzone class="upload-dropzone" (change)="onSelect($event)" [expandable]="true" accept="image/jpeg,image/jpg,image/png">
+	<ngx-dropzone-label>Drop images here</ngx-dropzone-label>
+	<ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+	</ngx-dropzone-image-preview>
+</ngx-dropzone>
