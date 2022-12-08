@@ -1,3 +1,18 @@
+<mat-toolbar>
+  <span routerLink="/home" routerLinkActive="active" class="title">
+    This Or That
+  </span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Quit and Return Home</span>
+    </button>
+  </mat-menu>
+</mat-toolbar> 
 <div class="grid-container" *ngIf="!gameOver">
   <div class="img-container" *ngFor="let cp of currentPair">
     <img [src]="cp.downloadUrl" [alt]="cp.imageUrl" (click)="onClick(cp)" loading="lazy"/>
