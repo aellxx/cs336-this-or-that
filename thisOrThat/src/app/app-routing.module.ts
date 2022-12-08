@@ -6,8 +6,8 @@ import { UploaderComponent } from './pages/create-game-page/uploader.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent},
+  { path: 'game', component: GamePageComponent },
   { path: 'create-game', component: UploaderComponent },
-  { path: 'game/:gameName', component: GamePageComponent },
   { path: '**', component: HomePageComponent },
 
 ];
