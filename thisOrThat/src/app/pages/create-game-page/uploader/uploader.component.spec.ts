@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultPageComponent } from './result-page.component';
+import { UploaderComponent } from './uploader.component';
 
-describe('ResultPageComponent', () => {
-  let component: ResultPageComponent;
-  let fixture: ComponentFixture<ResultPageComponent>;
+describe('UploaderComponent', () => {
+  let component: UploaderComponent;
+  let fixture: ComponentFixture<UploaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResultPageComponent ]
+      declarations: [ UploaderComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ResultPageComponent);
+    fixture = TestBed.createComponent(UploaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

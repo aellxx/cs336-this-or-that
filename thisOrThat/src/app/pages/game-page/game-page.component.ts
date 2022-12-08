@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { ImageRec } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-game-page',
@@ -10,64 +9,80 @@ import { ImageRec } from 'src/app/services/data.service';
 
 })
 export class GamePageComponent implements OnInit {
-  imageArr: ImageRec[] = [];
-  currentPair: ImageRec[] = [];
-  chosenImages: ImageRec[] = [];
-  top3Records: ImageRec[] = [];
+  // loading game
+  gameVersion: string = "";
+  imageList: string[] = [];
+  currentPair: string[] = []
+  chosenImages: string[] = [];
+  gameOver = false;
 
-  chosenImage$: BehaviorSubject<ImageRec> = new BehaviorSubject<ImageRec>({imageUrl: "", imageId: -1, winCount: 0});
+  startIdx = 0; 
+  endIdx = 2; 
+  currentRound = 16;
 
-  gameOver: boolean = false;
-  currentRound: number = 16;
 
-  startIdx = 0;
-  endIdx = 2;
+  constructor(private actRt: ActivatedRoute, private dataSvc: DataService) {
+    // get the route parameter
+    this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
 
-  constructor(private dataSvc: DataService) {
-    this.dataSvc.imageRecords$.subscribe((res) => {
-      this.imageArr = res;
-      this.currentPair = this.imageArr.slice(0, 2);
-    });
+    if (localStorage.getItem("imageList")) {
+      this.imageList = JSON.parse(localStorage.getItem("imageList") || "{}");
+    }
+
+    this.currentPair = [...this.imageList].slice(0,2);
   }
 
   ngOnInit(): void {
+    this.dataSvc.games$.subscribe(res => {
+      if (res) {
+        this.imageList = res[this.gameVersion];
+        console.log(this.imageList);
+        console.log(this.imageList[0]);
+        if (!localStorage.getItem("imageList")) {
+          localStorage.setItem("imageList", JSON.stringify(this.imageList));
+        }
+      }
+    })
+  }
+
+  ngOnChanges(): void {
+
   }
 
   onChooseImage = (i: number): void => {
+    console.log(this.imageList ? this.imageList.length : null);
     // Play round
-    if (this.startIdx < this.imageArr.length) {
-      console.log(this.startIdx, this.endIdx);
+    if (this.imageList && this.startIdx < this.imageList.length) {
       // add to chosen images
       this.chosenImages.push(this.currentPair[i]);
       // update indices
       this.startIdx = this.endIdx;
       this.endIdx += 2;
       // render next pair
-      this.currentPair = this.imageArr.slice(this.startIdx, this.endIdx);
+      this.currentPair = this.imageList.slice(2, 4);
 
       // reset for next round
-      if (this.chosenImages.length * 2 === this.imageArr.length) {
+      if (this.chosenImages.length * 2 === this.imageList.length) {
         if (this.chosenImages.length === 1) {
           this.gameOver = !this.gameOver;
-          this.dataSvc.updateWinCount(this.chosenImages[0]);
-          this.dataSvc.top3Records$.subscribe((res) => {
-            this.top3Records = res;
-            console.log(this.top3Records);
-          })
+          // this.dataSvc.updateWinCount(this.chosenImages[0]);
+          // this.dataSvc.top3Records$.subscribe((res) => {
+          //   this.top3Records = res;
+          //   console.log(this.top3Records);
+          }
         } else {
           this.setNewRound();
         }
       }
     }
-  };
 
   setNewRound = () => {
-    this.imageArr = [...this.chosenImages];
+    this.imageList = [...this.chosenImages];
     this.chosenImages = [];
-    this.currentPair = this.imageArr.slice(0, 2);
+    this.currentPair = this.imageList.slice(0, 2);
     // reset index
     this.startIdx = 0;
     this.endIdx = 2;
-    this.currentRound = this.imageArr.length;
+    this.currentRound = this.imageList.length;
   };
-}
+};

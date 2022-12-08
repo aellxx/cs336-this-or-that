@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ImageRec } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-result',
@@ -7,6 +6,6 @@ import { ImageRec } from 'src/app/services/data.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent {
-  @Input() favoriteImg: ImageRec | undefined;
+ 
   
 }
