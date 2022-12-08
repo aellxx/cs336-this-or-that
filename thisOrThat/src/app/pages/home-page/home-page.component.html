@@ -1,21 +1,18 @@
 <div class="flex-container">
+  
+  <img class="bg-img" src="https://img.itch.zone/aW1hZ2UvMTM5MTU3MS84MTA4OTAzLmdpZg==/original/kK4niq.gif" alt="">
   <div class="grid-container">
-    <h1 class="game-title">Favorite Photo Picker</h1>
-    <button mat-flat-button color="primary" (click)="onClickPlay('test2')">
+    <h1 class="game-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THIS OR THAT!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+    <button mat-flat-button class="custom-button" color="primary" (click)="onClickPlay('test2')">
       Play a Sample Game
     </button>
-    <button mat-flat-button color="accent" (click)="createGame()">Create a new game</button>
+    <button mat-flat-button class="custom-button" color="secondary" (click)="createGame()">Create a new game</button>
+    
     <div class="custom-games game-grid-container">
-      <mat-list>
-        <mat-list-item *ngFor="let game of gameNames" (click)="onClickPlay(game)">
-          {{ game }}
-        </mat-list-item>
-      </mat-list>
-      <!-- <button mat-fab color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">
+      <div class="custom-games-title-container">Load existing game</div>
+      <button mat-stroked-button color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">
         {{ game }}
-      </button> -->
+      </button>
     </div>
-
-    div
   </div>
 </div>
