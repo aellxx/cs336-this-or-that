@@ -4,14 +4,11 @@
     <button mat-flat-button color="primary" (click)="onClickPlay('sample')">
       Play a Sample Game
     </button>
+    <button mat-flat-button color="accent" (click)="createGame()">Create a new game</button>
     <div class="custom-games game-grid-container">
-      <button mat-fab *ngFor="let game of gameNames" (click)="onClickPlay(game)">
+      <button mat-fab color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">
         {{ game }}
       </button>
     </div>
-  </div>
-
-  <div>
-    <button (click)="createGame()">Create a new game</button>
   </div>
 </div>
