@@ -1,14 +1,21 @@
 <div class="flex-container">
   <div class="grid-container">
     <h1 class="game-title">Favorite Photo Picker</h1>
-    <button mat-flat-button color="primary" (click)="onClickPlay('sample')">
+    <button mat-flat-button color="primary" (click)="onClickPlay('test2')">
       Play a Sample Game
     </button>
     <button mat-flat-button color="accent" (click)="createGame()">Create a new game</button>
     <div class="custom-games game-grid-container">
-      <button mat-fab color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">
+      <mat-list>
+        <mat-list-item *ngFor="let game of gameNames" (click)="onClickPlay(game)">
+          {{ game }}
+        </mat-list-item>
+      </mat-list>
+      <!-- <button mat-fab color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">
         {{ game }}
-      </button>
+      </button> -->
     </div>
+
+    div
   </div>
 </div>

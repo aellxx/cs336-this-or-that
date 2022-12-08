@@ -20,6 +20,8 @@ import { UploaderComponent } from './pages/create-game-page/uploader.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     NgxDropzoneModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

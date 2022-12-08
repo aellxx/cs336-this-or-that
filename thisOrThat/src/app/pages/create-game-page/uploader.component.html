@@ -1,8 +1,10 @@
-<mat-form-field class="example-full-width">
-    <mat-label>Title of the game</mat-label>
-    <input matInput placeholder="ex. Norman-Web" [(ngModel)]="game_name">
-</mat-form-field>
 
+<div class="game-title-container">
+    <mat-form-field>
+        <mat-label>Title of the game</mat-label>
+        <input matInput placeholder="ex. Norman-Web" [(ngModel)]="game_name">
+    </mat-form-field>
+</div>
 
 <div class="upload-button-container">
     <button mat-raised-button color="primary" (click)="uploadImages()">Upload Images</button>
