@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { GamePageComponent } from './pages/game-page/game-page.component';
-import { UploaderComponent } from './pages/create-game-page/uploader/uploader.component';
+import { UploaderComponent } from './pages/create-game-page/uploader.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';

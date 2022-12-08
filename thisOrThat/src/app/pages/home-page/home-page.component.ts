@@ -33,6 +33,6 @@ export class HomePageComponent implements OnInit {
   }
 
   createGame = (): void => {
-    this.router.navigate(["/uploader"]);
+    this.router.navigate(["/create-game"]);
   }
 }

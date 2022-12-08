@@ -14,7 +14,7 @@
   </mat-menu>
 </mat-toolbar>
 
-<div class="grid-container" *ngIf="!gameOver">
+<!-- <div class="grid-container" *ngIf="!gameOver">
   <div class="img-container" *ngFor="let cp of currentPair; let i = index">
     <img [src]="cp.imageUrl" [alt]="cp.imageId" (click)="onChooseImage(i)" />
   </div>
@@ -22,5 +22,5 @@
 </div>
 <div class="winner-container" *ngIf="gameOver">
   <app-result [favoriteImg]="chosenImages[0]"></app-result>
-  <!-- <div *ngFor="let rec of top3Records">{{rec.imageUrl}} {{rec.imageId}}</div> -->
-</div>
+  <div *ngFor="let rec of top3Records">{{rec.imageUrl}} {{rec.imageId}}</div>
+</div> -->
