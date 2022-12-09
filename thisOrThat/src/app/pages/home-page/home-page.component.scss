@@ -1,10 +1,10 @@
 .flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .bg-img {
@@ -14,55 +14,53 @@
   top: 0;
   width: 100%;
   height: auto;
-
 }
 
 .grid-container {
-    display: grid; 
-    grid-template-rows: 2fr 0.5fr 1fr 3fr;
-    row-gap: 1vh;
+  display: grid;
+  grid-template-rows: 2fr 0.5fr 1fr 3fr;
+  row-gap: 1vh;
 }
 .game-title {
-    position: relative;
-    font-family: 'Press Start 2P';
-    margin: auto;
-    text-align: center;;
+  position: relative;
+  font-family: "Press Start 2P";
+  margin: auto;
+  text-align: center;
 }
 
 .game-grid-container {
-    display: grid; 
-    grid-template-columns: repeat(1, 1fr);
-    row-gap: 1vh;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 1vh;
+  margin: auto;
 }
 
 .custom-games-title-container {
-    text-align: center;
-    margin-top: 5vh;
-    position: relative;
+  text-align: center;
+  margin-top: 5vh;
+  position: relative;
 }
 
 .mat-mdc-unelevated-button.mat-primary {
-    background-color: #00303b;
-    font-size: 1vw;
-    width: 70%;
-
+  background-color: #00303b;
+  font-size: 1vw;
+  width: 70%;
 }
 
 .mat-mdc-unelevated-button.mat-secondary {
-    background-color: #164c59;
-    color: white;
-    font-size: 1vw;
-    width: 70%;
+  background-color: #164c59;
+  color: white;
+  font-size: 1vw;
+  width: 70%;
 }
 
 .custom-button {
-    margin: auto;
+  margin: auto;
 }
 
 .mdc-button {
-    background-color: #8fb8c3;
-    width: 70%;
-    margin: auto;
-    font-size: 0.8vw;
+  background-color: #8fb8c3;
+  width: 70%;
+  margin: auto;
+  font-size: 0.8vw;
 }
