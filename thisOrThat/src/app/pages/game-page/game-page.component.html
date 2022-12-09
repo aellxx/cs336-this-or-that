@@ -2,7 +2,8 @@
   <span routerLink="/home" routerLinkActive="active" class="title">
     This Or That
   </span>
-  <span *ngIf="!gameOver" class="center-message">Round of {{currentRound}}</span>
+  <span *ngIf="!gameOver && currentRound !== 2" class="center-message">Round of {{currentRound}}</span>
+  <span *ngIf="!gameOver && currentRound === 2" class="center-message">Finals</span>
   <span *ngIf="gameOver" class="center-message">Results</span>
   <span class="button-container">
   <button
