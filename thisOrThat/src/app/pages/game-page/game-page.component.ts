@@ -15,6 +15,8 @@ export class GamePageComponent implements OnInit {
   chosenImages: ImageRec[] = [];
   gameOver = false;
 
+  classNames = ["first", "second", "third"];
+
   startIdx = 0;
   endIdx = 2;
   currentRound = 16;
