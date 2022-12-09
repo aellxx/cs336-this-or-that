@@ -5,11 +5,22 @@
 mat-toolbar {
   // border: 1px solid red;
   height: 6.5vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
-  .round-text {
-    width: 50%;
-    margin: 0 auto;
+  .center-message {
+    text-align: center;
+    font-size: 1.5vw;
+  }
+
+  .button-container {
+    display: flex; 
+    justify-content: end;
     // border: 1px solid red
+  }
+
+  .menu-message {
+    font-size: 15px;
   }
 }
 
