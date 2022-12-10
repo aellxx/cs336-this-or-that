@@ -4,6 +4,15 @@
   flex: 1 1 auto;
 }
 
+.title {
+  color: inherit;
+  text-decoration: inherit;
+  display: block;
+  font-size: 1.5vw;
+  width: 50px;
+  cursor: pointer;
+}
+
 mat-toolbar {
   // border: 1px solid red;
   height: 6.5vh;
@@ -102,3 +111,8 @@ mat-toolbar {
     }
   }
 }
+
+.confirm-button {
+  margin: 10px;
+}
+

@@ -21,6 +21,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { MatListModule } from '@angular/material/list';
     GamePageComponent,
     PhotoContainerComponent,
     ResultComponent,
-    UploaderComponent
+    UploaderComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { MatListModule } from '@angular/material/list';
     NgxDropzoneModule,
     MatInputModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
