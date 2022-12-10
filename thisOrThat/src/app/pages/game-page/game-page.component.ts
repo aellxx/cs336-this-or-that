@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent, ConfirmDialogModel } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { DataService } from 'src/app/services/data.service';
 import { ImageRec } from 'src/app/services/data.service';
 
@@ -15,17 +17,17 @@ export class GamePageComponent implements OnInit {
   chosenImages: ImageRec[] = [];
   gameOver = false;
 
-  classNames = ["first", "second", "third"];
-
   startIdx = 0;
   endIdx = 2;
   currentRound = 16;
+  classNames = ["first", "second", "third"];
 
   imageArr: ImageRec[] = [];
   chosenImage: ImageRec = {imageUrl: '', downloadUrl: '', winCount: 0, id: "-1"}
   top3Records: ImageRec[] = [];
+  result: boolean = false;
 
-  constructor(private actRt: ActivatedRoute, private dataSvc: DataService) {
+  constructor(private router: Router, private actRt: ActivatedRoute, private dataSvc: DataService, public dialog: MatDialog) {
     // get the route parameter
     this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
 
@@ -76,4 +78,26 @@ export class GamePageComponent implements OnInit {
     this.endIdx = 2;
     this.currentRound = this.imageArr.length;
   };
+
+  confirmDialog(): void {
+
+    const message = `Your game will be lost.\nWould you like to proceed?`;
+
+    const dialogData = new ConfirmDialogModel("Go to Main page", message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      console.log(this.result);
+      console.log(typeof(this.result));
+      if(this.result === true) {
+        this.router.navigateByUrl("home");
+      }
+
+    });
+  }
 }
