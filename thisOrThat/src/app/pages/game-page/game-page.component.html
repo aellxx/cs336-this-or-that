@@ -1,25 +1,44 @@
-<mat-toolbar>
+<mat-toolbar class="toolbar-grid-container">
   <span routerLink="/home" routerLinkActive="active" class="title">
     This Or That
   </span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <span *ngIf="!gameOver && currentRound !== 2" class="center-message">Round of {{currentRound}}</span>
+  <span *ngIf="!gameOver && currentRound === 2" class="center-message">Finals</span>
+  <span *ngIf="gameOver" class="center-message">Results</span>
+  <span class="button-container">
+  <button
+    mat-icon-button
+    class="example-icon"
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
     <mat-icon>menu</mat-icon>
   </button>
+</span>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="/home" routerLinkActive="active">
       <mat-icon>home</mat-icon>
-      <span>Quit and Return Home</span>
+      <span class="menu-message">Quit and Return Home</span>
     </button>
   </mat-menu>
-</mat-toolbar> 
+</mat-toolbar>
+
 <div class="grid-container" *ngIf="!gameOver">
   <div class="img-container" *ngFor="let cp of currentPair">
-    <img [src]="cp.downloadUrl" [alt]="cp.imageUrl" (click)="onClick(cp)" loading="lazy"/>
+    <img
+      [src]="cp.downloadUrl"
+      [alt]="cp.imageUrl"
+      (click)="onClick(cp)"
+      loading="lazy"
+    />
   </div>
-
 </div>
-<div class="winner-container" *ngIf="gameOver">
-  <app-result [winner]="chosenImage"></app-result>
-  <div *ngFor="let rec of top3Records"><img [src]="rec.downloadUrl" width="50"> <p>{{rec.downloadUrl}}</p></div>
+
+<div class="result-container" *ngIf="gameOver">
+  <div class="winner">
+    <img [src]="chosenImage.downloadUrl" />
+  </div>
+  <div *ngFor="let rec of top3Records; let i = index" [ngClass]="classNames[i]">
+    <img [src]="rec.downloadUrl" />
+  </div>
 </div>

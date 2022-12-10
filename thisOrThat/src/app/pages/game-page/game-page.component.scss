@@ -1,48 +1,97 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 mat-toolbar {
-    // border: 1px solid red;
-    height: 6.5vh;
+  // border: 1px solid red;
+  height: 6.5vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
-    .title {}
+  .center-message {
+    text-align: center;
+    font-size: 1.5vw;
+  }
 
-    .round-text {
-        width: 50%;
-        margin: 0 auto;
-        // border: 1px solid red
-    }
+  .button-container {
+    display: flex; 
+    justify-content: end;
+    // border: 1px solid red
+  }
 
-
+  .menu-message {
+    font-size: 15px;
+  }
 }
-
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 93.5vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 93.5vh;
 
-    .img-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        img {
-            width: 100%;
-            height: 93.5vh;
-            object-fit: cover;
-        }
+    img {
+      width: 100%;
+      height: 93.5vh;
+      object-fit: cover;
     }
-
+  }
 }
 
-.winner-container {
-    height: 93.5vh;
-    width: auto;
-    overflow-y: hidden;
+.result-container {
+  display: grid;
+  height: 93.5vh;
+  grid-template-areas:
+    "winner winner first first"
+    "winner winner first first"
+    "winner winner second third"
+    "winner winner second third";
+  row-gap: 1vw;
+  column-gap: 1vh;
 
-    app-result {
-        background-color: aqua;
+  .winner {
+    grid-area: winner;
+    width: 49.5vw;
+    height: 93.5vh;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+  }
+
+  .first {
+    grid-area: first;
+    width: 49.5vw;
+    height: 46.25vh;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .second {
+    grid-area: second;
+    width: 24.25vw;
+    height: 46.25vh;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .third {
+    grid-area: third;
+    width: 24.25vw;
+    height: 46.25vh;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
