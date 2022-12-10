@@ -5,22 +5,7 @@
   <span *ngIf="!gameOver && currentRound !== 2" class="center-message">Round of {{currentRound}}</span>
   <span *ngIf="!gameOver && currentRound === 2" class="center-message">Finals</span>
   <span *ngIf="gameOver" class="center-message">Results</span>
-  <span class="button-container">
-  <button
-    mat-icon-button
-    class="example-icon"
-    [matMenuTriggerFor]="menu"
-    aria-label="Example icon-button with a menu"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-</span>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/home" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-      <span class="menu-message">Quit and Return Home</span>
-    </button>
-  </mat-menu>
+  <span class="game-name">{{gameVersion}}</span>
 </mat-toolbar>
 
 <div class="grid-container" *ngIf="!gameOver">
@@ -37,8 +22,10 @@
 <div class="result-container" *ngIf="gameOver">
   <div class="winner">
     <img [src]="chosenImage.downloadUrl" />
+    <div class="image-text">Your First Pick</div>
   </div>
   <div *ngFor="let rec of top3Records; let i = index" [ngClass]="classNames[i]">
     <img [src]="rec.downloadUrl" />
+    <div class="image-text">Others' {{classNames[i]}} Pick</div>
   </div>
 </div>
