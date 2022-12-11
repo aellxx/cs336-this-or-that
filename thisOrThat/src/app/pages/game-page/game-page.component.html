@@ -5,7 +5,7 @@
   <span *ngIf="!gameOver && currentRound !== 2" class="center-message">Round of {{currentRound}}</span>
   <span *ngIf="!gameOver && currentRound === 2" class="center-message">Finals</span>
   <span *ngIf="gameOver" class="center-message">Results</span>
-  <span class="game-name">{{gameVersion}}</span>
+  <span class="game-name">Game: {{gameVersion}}</span>
 </mat-toolbar>
 
 <div class="grid-container" *ngIf="!gameOver">
