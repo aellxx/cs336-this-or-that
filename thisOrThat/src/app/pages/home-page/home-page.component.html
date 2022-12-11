@@ -7,7 +7,6 @@
       Play a Random Game
     </button>
     <button mat-flat-button class="custom-button" color="secondary" (click)="createGame()">Create a new game</button>
-    
     <div class="custom-games game-grid-container">
       <div class="custom-games-title-container">Load existing game</div>
       <button mat-stroked-button color="secondary" *ngFor="let game of gameNames" (click)="onClickPlay(game)">

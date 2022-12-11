@@ -15,17 +15,18 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomePageComponent implements OnInit {
   gameNames: string[] = [];
+  isLoadingGames = true;
 
-  constructor(private router: Router, private dataSvc: DataService) {
-    // get all the games from service firebaseData
+  constructor(private router: Router, private dataSvc: DataService) {}
+
+  ngOnInit (): void {
+    this.dataSvc.getGames();
     this.dataSvc.gameNames$.subscribe((res) => {
       if (res) {
+        console.log(res);
         this.gameNames = res;
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onClickPlayRandomGame = (): void => {

@@ -1,47 +1,63 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject, map } from 'rxjs';
-import {
-  getDownloadURL,
-  getStorage,
-  listAll,
-  ref,
-} from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
-import FieldValue = firebase.firestore.FieldValue;
-
-export interface Game {
-  [k: string]: string[];
-}
+import { getStorage, listAll, ref } from '@angular/fire/storage';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 export interface ImageRec {
+  id?: string;
   imageUrl: string;
   winCount: number;
   downloadUrl?: string;
-  id?: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  games: Game = {};
   gameNames: string[] = [];
-  games$: BehaviorSubject<Game | null> = new BehaviorSubject<Game | null>(null);
   gameNames$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  top3Records$: BehaviorSubject<ImageRec[]> = new BehaviorSubject<ImageRec[]>(
-    []
-  );
+  top3Records$: BehaviorSubject<ImageRec[]> = new BehaviorSubject<ImageRec[]>([]);
 
-  constructor(private db: AngularFirestore, private fs: AngularFireStorage) {
-    this.getData();
-  }
+  constructor(private db: AngularFirestore, private fs: AngularFireStorage) {}
 
-  getFireStoreData = (folderName: string) => {
+  /**
+   * Used in home-page.component to load all possible games
+   */
+  getGames = (): void => {
+    // access to firebase storage
+    const storage = getStorage();
+    const storageRef = ref(storage);
+
+    // access all folders in the firebase storage
+    listAll(storageRef)
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          // get path to folder (a.k.a. each individual game)
+          const folderFullPath = folderRef.fullPath;
+
+          // add to the list of games
+          if (!this.gameNames.find((item) => item === folderFullPath)){
+            this.gameNames.push(folderFullPath);
+          }
+        });
+
+        // send data to Observer (home-page.component)
+        this.gameNames$.next(this.gameNames);
+      })
+      .catch((error) => {
+        alert(error);
+      })
+  };
+
+  /**
+   * Used in game-page.component to load images and related information
+   * @param folderName name of the game
+   * @returns Observable object containing an array of imageRec[] 
+   */
+  getFireStoreData = (folder: string): Observable<ImageRec[]> => {
     return this.db
-      .collection<ImageRec>(folderName)
+      .collection<ImageRec>(folder)
       .snapshotChanges()
       .pipe(
         map((actions) =>
@@ -54,51 +70,32 @@ export class DataService {
       );
   };
 
-  private getData = async () => {
-    const storage = getStorage();
-    const storageRef = ref(storage);
-
-    listAll(storageRef)
-      .then((res) => {
-        res.prefixes.forEach((folderRef, idx) => {
-          // get path to folder (a.k.a. each individual game)
-          const folderFullPath = folderRef.fullPath;
-          this.games[folderFullPath] = [];
-
-          // get all the images in the folder
-          listAll(folderRef).then((res) =>
-            res.items.forEach((itemRef) => {
-              getDownloadURL(ref(storage, itemRef.fullPath)).then((url) => {
-                this.games[folderFullPath].push(url);
-              });
-            })
-          );
-        });
-        //console.log("GAMES: ", this.games);
-        // send the games to Observer components
-        this.games$.next(this.games);
-        this.gameNames$.next(Object.keys(this.games));
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
-  updateWinCount = async (
-    folder: string,
-    imageID: string,
-    imageWinCount: number
-  ) => {
-    const imageRef = this.db.collection<ImageRec>(folder).doc(imageID);
-    const res = await imageRef.update({
+  /**
+   * Used in game-page.component to update the win-count of the user's favorite image
+   * @param folder name of the game
+   * @param imageID image identifier
+   * @param imageWinCount current win count
+   */
+  updateWinCount = async (folder: string, imageID: string, imageWinCount: number): Promise<void> => {
+    // get image document
+    const imageDoc = this.db.collection<ImageRec>(folder).doc(imageID);
+    // update win count
+    await imageDoc.update({
       winCount: ++imageWinCount,
     });
   };
 
-  getTop3Records = (folder: string) => {
+  /**
+   * Used in game-page.component to get the overall top 3 images
+   * @param folder name of the game
+   */
+  getTop3Records = (folder: string): void => {
+    // read data in descending winCount order
     this.db
       .collection<ImageRec>(folder, (ref) => ref.orderBy('winCount', 'desc'))
       .valueChanges()
       .subscribe((res) => {
+        // send top 3 images to Observer in game-page.component
         this.top3Records$.next(res.slice(0, 3));
       });
   };
