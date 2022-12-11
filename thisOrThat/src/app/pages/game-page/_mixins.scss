@@ -85,74 +85,57 @@
       "winner winner second third";
     row-gap: 1vw;
     column-gap: 1vh;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+
     .winner {
-        grid-area: winner;
-        width: 49.5vw;
-        height: 93.5vh;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-          }
+      grid-area: winner;
+      width: 49.5vw;
+      height: 93.5vh;
+    }
+
+    .first {
+      grid-area: first;
+      width: 49.5vw;
+      height: 46.25vh;
+      .image-text-container {
+        font-size: 1.3vh;
       }
-    
-      .first {
-        grid-area: first;
-        width: 49.5vw;
-        height: 46.25vh;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-          }
-        .image-text-container {
-          font-size: 1.3vh;
-        }
-        .win-count-text {
-          font-size: 1vh;
-        }
-        
+      .win-count-text {
+        font-size: 1vh;
       }
-      .second {
-        grid-area: second;
-        width: 24.25vw;
-        height: 46.25vh;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-          }
-        .image-text-container {
-          font-size: 1.3vh;
-        }
-        .win-count-text {
-          font-size: 1vh;
-        }
-        
+    }
+    .second {
+      grid-area: second;
+      width: 24.25vw;
+      height: 46.25vh;
+      .image-text-container {
+        font-size: 1.3vh;
       }
-      .third {
-        grid-area: third;
-        width: 24.25vw;
-        height: 46.25vh;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-          }
-        .image-text-container {
-          font-size: 1.3vh;
-          margin: auto;
-        }
-        .win-count-text {
-          font-size: 1vh;
-        }
+      .win-count-text {
+        font-size: 1vh;
       }
+    }
+    .third {
+      grid-area: third;
+      width: 24.25vw;
+      height: 46.25vh;
+      .image-text-container {
+        font-size: 1.3vh;
+        margin: auto;
+      }
+      .win-count-text {
+        font-size: 1vh;
+      }
+    }
   }
-  @media only screen and (max-width: 768px) {
+
+  @media only screen and (max-width: 768px) and (min-width: 375px) {
     display: grid;
     height: 93.5vh;
     grid-template-areas:
@@ -161,71 +144,55 @@
     row-gap: 1vw;
     column-gap: 1vh;
 
-    .winner {
-    grid-area: winner;
-    width: 100vw;
-    height: 46.75vh;
     img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
-      }
-  }
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
 
-  .first {
-    grid-area: first;
-    width: 33.3vw;
-    height: 46.25vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
+    .winner {
+      grid-area: winner;
+      width: 100vw;
+      height: 46.75vh;
+    }
+
+    .first {
+      grid-area: first;
+      width: 33.3vw;
+      height: 46.25vh;
+
+      .image-text-container {
+        font-size: 1.3vh;
       }
-    .image-text-container {
-      font-size: 1.3vh;
-    }
-    .win-count-text {
-      font-size: 1vh;
-    }
-    
-  }
-  .second {
-    grid-area: second;
-    width: 33.3vw;
-    height: 46.25vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
+      .win-count-text {
+        font-size: 1vh;
       }
-    .image-text-container {
-      font-size: 1.3vh;
     }
-    .win-count-text {
-      font-size: 1vh;
-    }
-    
-  }
-  .third {
-    grid-area: third;
-    width: 33.3vw;
-    height: 46.25vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
+    .second {
+      grid-area: second;
+      width: 33.3vw;
+      height: 46.25vh;
+
+      .image-text-container {
+        font-size: 1.3vh;
       }
-    .image-text-container {
-      font-size: 1.3vh;
-      margin: auto;
+      .win-count-text {
+        font-size: 1vh;
+      }
     }
-    .win-count-text {
-      font-size: 1vh;
+    .third {
+      grid-area: third;
+      width: 33.3vw;
+      height: 46.25vh;
+
+      .image-text-container {
+        font-size: 1.3vh;
+        margin: auto;
+      }
+      .win-count-text {
+        font-size: 1vh;
+      }
     }
-  }
   }
 }

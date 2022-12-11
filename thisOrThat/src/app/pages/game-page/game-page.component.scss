@@ -46,53 +46,6 @@ mat-toolbar {
       font-size: 1.5vh;
     }
   }
-
-  // .winner {
-  //   grid-area: winner;
-  //   width: 49.5vw;
-  //   height: 93.5vh;
-  //   @extend .result-img;
-  // }
-
-  // .first {
-  //   grid-area: first;
-  //   width: 49.5vw;
-  //   height: 46.25vh;
-  //   @extend .result-img;
-  //   .image-text-container {
-  //     font-size: 1.3vh;
-  //   }
-  //   .win-count-text {
-  //     font-size: 1vh;
-  //   }
-    
-  // }
-  // .second {
-  //   grid-area: second;
-  //   width: 24.25vw;
-  //   height: 46.25vh;
-  //   @extend .result-img;
-  //   .image-text-container {
-  //     font-size: 1.3vh;
-  //   }
-  //   .win-count-text {
-  //     font-size: 1vh;
-  //   }
-    
-  // }
-  // .third {
-  //   grid-area: third;
-  //   width: 24.25vw;
-  //   height: 46.25vh;
-  //   @extend .result-img;
-  //   .image-text-container {
-  //     font-size: 1.3vh;
-  //     margin: auto;
-  //   }
-  //   .win-count-text {
-  //     font-size: 1vh;
-  //   }
-  // }
 }
 
 .confirm-button {
