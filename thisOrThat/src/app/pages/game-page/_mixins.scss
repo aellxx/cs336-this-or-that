@@ -1,6 +1,6 @@
 @mixin responsiveToolBar {
   @media only screen and (min-width: 768px) {
-    /* have everything in nav bar */
+    // have all three types of text in header
     grid-template-columns: repeat(3, 1fr);
 
     .game-title {
@@ -19,6 +19,7 @@
     }
   }
   @media only screen and (max-width: 768px) and (min-width: 375px) {
+    // smaller-width screen: only two types of text in the header
     grid-template-columns: repeat(2, 1fr);
 
     .game-title {
@@ -38,6 +39,7 @@
 }
 
 @mixin responsiveContent {
+  // when screen is large: organize horizontally
   @media only screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -56,6 +58,7 @@
     }
   }
   @media only screen and (max-width: 768px) {
+    // when screen is smaller: organize vertically
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     height: 93.5vh;

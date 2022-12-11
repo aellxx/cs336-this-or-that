@@ -1,10 +1,6 @@
 @import '_extensions.scss';
 @import '_mixins.scss';
 
-.toolbar-grid-container, .grid-container, .result-container {
-  min-width: 375px; 
-}
-
 .title {
   color: inherit;
   text-decoration: inherit;
