@@ -5,6 +5,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent, ConfirmDialogModel } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-uploader',
@@ -20,9 +23,10 @@ export class UploaderComponent {
   images_limit_state: boolean = false;
   game_name: string = "";
   // download_url: (<Observable>() => string) | undefined;
+  result: boolean = false;
 
   @Output() dropped = new EventEmitter<File[]>();
-
+  
   onSelect(event: { addedFiles: any; }) {
     if (this.files.length + event.addedFiles.length <= 16) {
       this.files.push(...event.addedFiles);        
@@ -38,21 +42,27 @@ export class UploaderComponent {
 	}
 
   uploadImages() {
-    this.startUpload();
-    // if (this.files.length !== 16) {
-    //   this.warning_state = true;
-    // }
+    if (this.files.length !== 16) {
+      this.warning_state = true;
+    }
+    else {
+      this.startUpload();
+    }
   }
 
+  loading: boolean = false;
+  uploaded_num: number = 0;
   task!: AngularFireUploadTask;
 
   percentage: Observable<number> | undefined;
   snapshot!: Observable<any>;
   downloadURL: string = "";
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) {}
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public dialog: MatDialog, private router: Router) {
+    
+  }
   
   startUpload() {
-    console.log(this.file);
+    this.loading = true;
     for (let i = 0; i < this.files.length; i++) {
       this.file = this.files[i];
       // The storage path
@@ -64,6 +74,7 @@ export class UploaderComponent {
       const storage = getStorage();
       const storageRef = ref(storage, path)
       const uploadTask = uploadBytesResumable(storageRef, this.file);
+
 
       uploadTask.on("state_changed",
       (snapshot) => {
@@ -105,13 +116,45 @@ export class UploaderComponent {
               "imageUrl": path,
               "downloadUrl": downloadURL,
               "winCount": 0
-            }, { merge : true })
-            console.log("images sent");
+            }, { merge : true });
+            this.uploaded_num = this.uploaded_num + 1;
+            console.log(this.uploaded_num);
+            if (this.uploaded_num === 16) {
+              this.loading = false;
+              this.confirmDialog();
+            }
           })
         }
       )      
     }
+  }
 
+  confirmDialog(): void {
+    const title = "Images were successfully uploaded."
+    const message = "Would you like to start the game?";
+    const no_bool = true;
+    const yes_bool = true;
+
+    const dialogData = new ConfirmDialogModel(title, message, no_bool, yes_bool);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result === true) {
+        this.router.navigate(['/game', {gameName: this.game_name}]);
+      } else {
+        this.router.navigateByUrl("home");
+      }
+
+    });
+  }
+
+  goToHomePage() {
+    this.router.navigateByUrl("home");
   }
 
 }

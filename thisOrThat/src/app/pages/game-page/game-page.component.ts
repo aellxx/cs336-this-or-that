@@ -67,8 +67,6 @@ export class GamePageComponent implements OnInit {
     }
   }
 
-  
-
   setNewRound = () => {
     this.imageArr = [...this.chosenImages];
     this.chosenImages = [];
@@ -81,9 +79,12 @@ export class GamePageComponent implements OnInit {
 
   confirmDialog(): void {
 
+    const title = "Go to Main page";
     const message = `Your game will be lost.\nWould you like to proceed?`;
+    const no_bool = true;
+    const yes_bool = true;
 
-    const dialogData = new ConfirmDialogModel("Go to Main page", message);
+    const dialogData = new ConfirmDialogModel(title, message, no_bool, yes_bool);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -92,8 +93,6 @@ export class GamePageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
-      console.log(this.result);
-      console.log(typeof(this.result));
       if(this.result === true) {
         this.router.navigateByUrl("home");
       }

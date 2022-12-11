@@ -9,12 +9,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ConfirmDialogComponent implements OnInit {
   title: string;
   message: string;
+  no_bool: boolean;
+  yes_bool: boolean;
 
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel) {
     // Update view with given values
     this.title = data.title;
     this.message = data.message;
+    this.no_bool = data.no_bool;
+    this.yes_bool = data.yes_bool;
   }
 
   ngOnInit() {
@@ -38,6 +42,11 @@ export class ConfirmDialogComponent implements OnInit {
  */
 export class ConfirmDialogModel {
 
-  constructor(public title: string, public message: string) {
+  constructor(
+    public title: string, 
+    public message: string, 
+    public no_bool: boolean, 
+    public yes_bool: boolean
+    ) {
   }
 }

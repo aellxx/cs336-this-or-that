@@ -36,14 +36,6 @@ export class DataService {
   );
 
   constructor(private db: AngularFirestore, private fs: AngularFireStorage) {
-    db.collection<ImageRec>('sampleGame')
-      .doc('id')
-      .ref.get()
-      .then((docSnapshot) => {
-        if (!docSnapshot.exists) {
-          db.collection('sampleGame').doc('id').set({});
-        }
-      });
     this.getData();
   }
 
