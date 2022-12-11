@@ -28,6 +28,13 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickPlayRandomGame = (): void => {
+    if (this.gameNames.length != 0) {
+      const randGame = this.gameNames[Math.floor(Math.random() * this.gameNames.length)];
+      this.router.navigate(['/game', {gameName: randGame}]);
+    }
+  }
+
   onClickPlay = (gn: string): void => {
     // console.log(gameName);
     this.router.navigate(['/game', {gameName: gn}]);

@@ -21,6 +21,7 @@ export class GamePageComponent implements OnInit {
   endIdx = 2;
   currentRound = 16;
   classNames = ["first", "second", "third"];
+  rankings = ["1st", "2nd", "3rd"];
 
   imageArr: ImageRec[] = [];
   chosenImage: ImageRec = {imageUrl: '', downloadUrl: '', winCount: 0, id: "-1"}
