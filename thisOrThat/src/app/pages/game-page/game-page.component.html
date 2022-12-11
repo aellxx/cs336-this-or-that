@@ -22,10 +22,16 @@
 <div class="result-container" *ngIf="gameOver">
   <div class="winner">
     <img [src]="chosenImage.downloadUrl" />
-    <div class="image-text">Your First Pick</div>
+    <div class="image-text-container">
+      <div class="image-text">Your 1st</div>
+      <div class="win-count-text">Win Count: {{chosenImage.winCount + 1}}</div>
+    </div>
   </div>
   <div *ngFor="let rec of top3Records; let i = index" [ngClass]="classNames[i]">
     <img [src]="rec.downloadUrl" />
-    <div class="image-text">Others' {{classNames[i]}} Pick</div>
+    <div class="image-text-container">
+      <div class="image-text">Overall {{rankings[i]}}</div>
+      <div class="win-count-text">Win Count: {{rec.winCount}}</div>
+    </div>
   </div>
 </div>

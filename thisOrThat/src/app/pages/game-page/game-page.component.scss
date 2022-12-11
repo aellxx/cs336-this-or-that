@@ -64,17 +64,30 @@ mat-toolbar {
   row-gap: 1vw;
   column-gap: 1vh;
 
+  .image-text-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1vh;
+    width: 35%;
+    position: relative;
+    bottom: 55%;
+    font-size: 2vh;
+    margin: auto;
+
+    .win-count-text {
+      font-size: 1.5vh;
+    }
+  }
+
   .winner {
     grid-area: winner;
     width: 49.5vw;
     height: 93.5vh;
     @extend .result-img;
-    
-    .image-text {
-      position: relative;
-      bottom: 50%;
-      left: 40%;
-    }
   }
 
   .first {
@@ -82,32 +95,37 @@ mat-toolbar {
     width: 49.5vw;
     height: 46.25vh;
     @extend .result-img;
-    .image-text {
-      position: relative;
-      bottom: 55%;
-      left: 35%;
+    .image-text-container {
+      font-size: 1.3vh;
     }
+    .win-count-text {
+      font-size: 1vh;
+    }
+    
   }
   .second {
     grid-area: second;
     width: 24.25vw;
     height: 46.25vh;
     @extend .result-img;
-    .image-text {
-      position: relative;
-      bottom: 55%;
-      left: 15%;
+    .image-text-container {
+      font-size: 1.3vh;
     }
+    .win-count-text {
+      font-size: 1vh;
+    }
+    
   }
   .third {
     grid-area: third;
     width: 24.25vw;
     height: 46.25vh;
     @extend .result-img;
-    .image-text {
-      position: relative;
-      bottom: 55%;
-      left: 15%;
+    .image-text-container {
+      font-size: 1.3vh;
+    }
+    .win-count-text {
+      font-size: 1vh;
     }
   }
 }
