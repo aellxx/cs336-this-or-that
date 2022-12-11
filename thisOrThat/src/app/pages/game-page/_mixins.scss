@@ -1,0 +1,231 @@
+@mixin responsiveToolBar {
+  @media only screen and (min-width: 768px) {
+    /* have everything in nav bar */
+    grid-template-columns: repeat(3, 1fr);
+
+    .game-title {
+      text-align: left;
+      font-size: 1.7vw;
+    }
+
+    .center-message {
+      text-align: center;
+      font-size: 2.5vh;
+    }
+
+    .game-name {
+      text-align: end;
+      font-size: 1.7vw;
+    }
+  }
+  @media only screen and (max-width: 768px) and (min-width: 375px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .game-title {
+      text-align: left;
+      font-size: 3.5vw;
+    }
+
+    .center-message {
+      text-align: center;
+      font-size: 3.5vw;
+    }
+
+    .game-name {
+      display: none;
+    }
+  }
+}
+
+@mixin responsiveContent {
+  @media only screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 93.5vh;
+
+    .img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 93.5vh;
+        object-fit: cover;
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    height: 93.5vh;
+
+    .img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 46.75vh;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+@mixin responsiveResult {
+  @media only screen and (min-width: 768px) {
+    display: grid;
+    height: 93.5vh;
+    grid-template-areas:
+      "winner winner first first"
+      "winner winner first first"
+      "winner winner second third"
+      "winner winner second third";
+    row-gap: 1vw;
+    column-gap: 1vh;
+    .winner {
+        grid-area: winner;
+        width: 49.5vw;
+        height: 93.5vh;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+          }
+      }
+    
+      .first {
+        grid-area: first;
+        width: 49.5vw;
+        height: 46.25vh;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+          }
+        .image-text-container {
+          font-size: 1.3vh;
+        }
+        .win-count-text {
+          font-size: 1vh;
+        }
+        
+      }
+      .second {
+        grid-area: second;
+        width: 24.25vw;
+        height: 46.25vh;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+          }
+        .image-text-container {
+          font-size: 1.3vh;
+        }
+        .win-count-text {
+          font-size: 1vh;
+        }
+        
+      }
+      .third {
+        grid-area: third;
+        width: 24.25vw;
+        height: 46.25vh;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+          }
+        .image-text-container {
+          font-size: 1.3vh;
+          margin: auto;
+        }
+        .win-count-text {
+          font-size: 1vh;
+        }
+      }
+  }
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    height: 93.5vh;
+    grid-template-areas:
+      "winner winner winner"
+      "first second third";
+    row-gap: 1vw;
+    column-gap: 1vh;
+
+    .winner {
+    grid-area: winner;
+    width: 100vw;
+    height: 46.75vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+      }
+  }
+
+  .first {
+    grid-area: first;
+    width: 33.3vw;
+    height: 46.25vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+      }
+    .image-text-container {
+      font-size: 1.3vh;
+    }
+    .win-count-text {
+      font-size: 1vh;
+    }
+    
+  }
+  .second {
+    grid-area: second;
+    width: 33.3vw;
+    height: 46.25vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+      }
+    .image-text-container {
+      font-size: 1.3vh;
+    }
+    .win-count-text {
+      font-size: 1vh;
+    }
+    
+  }
+  .third {
+    grid-area: third;
+    width: 33.3vw;
+    height: 46.25vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+      }
+    .image-text-container {
+      font-size: 1.3vh;
+      margin: auto;
+    }
+    .win-count-text {
+      font-size: 1vh;
+    }
+  }
+  }
+}
