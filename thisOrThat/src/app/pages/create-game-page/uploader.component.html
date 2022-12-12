@@ -1,11 +1,12 @@
 <mat-toolbar class="toolbar-grid-container">
     <span class="title" (click)="goToHomePage()">
         This Or That
-      </span>
-  </mat-toolbar>
+    </span>
+</mat-toolbar>
+
 <div class="game-title-container">
     <mat-form-field>
-        <mat-label>Title of the game</mat-label>
+        <mat-label class="game-title">Title of the game</mat-label>
         <input matInput placeholder="ex. Norman-Web" [(ngModel)]="game_name">
     </mat-form-field>
 </div>
