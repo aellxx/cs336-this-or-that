@@ -23,10 +23,14 @@
 
 .game-title-container {
     width: 80%;
+    min-width: 200px;
     margin: auto;
     margin-top: 30px;
 }
 
+.game-title {
+    font-size: 1vw;
+}
 .progress-bar {
     width: 80%;
     margin: auto;
