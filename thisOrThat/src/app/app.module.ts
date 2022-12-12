@@ -25,6 +25,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MatListModule,
     MatDialogModule,
     MatProgressBarModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

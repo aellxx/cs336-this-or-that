@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogModel } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-uploader',
@@ -24,6 +25,11 @@ export class UploaderComponent {
   game_name: string = "";
   // download_url: (<Observable>() => string) | undefined;
   result: boolean = false;
+
+  // check existing games
+  games: string[] = [];
+  gameExists: boolean = false; 
+  gamesLoaded: boolean = true; 
 
   @Output() dropped = new EventEmitter<File[]>();
   
@@ -57,8 +63,24 @@ export class UploaderComponent {
   percentage: Observable<number> | undefined;
   snapshot!: Observable<any>;
   downloadURL: string = "";
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public dialog: MatDialog, private router: Router) {
-    
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public dialog: MatDialog, private router: Router, private dataSvc: DataService) {
+    this.dataSvc.getGames();
+    this.dataSvc.gameNames$.subscribe((res) => {
+      if (res) {
+        this.games = res;
+        this.gamesLoaded = !this.gamesLoaded;
+      }
+    })
+  }
+
+  /**
+   * Checks if the game name is already in use
+   * @param gameName the user input for their custom game
+   */
+  checkDuplicateGame = (gameName: string) => {
+    this.game_name = gameName;
+    // if the game exists, set the related variable to true, else false
+    this.gameExists = (this.gamesLoaded && this.games.includes(gameName)) ? true : false; 
   }
   
   startUpload() {
