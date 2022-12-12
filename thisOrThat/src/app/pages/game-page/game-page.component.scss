@@ -11,7 +11,6 @@
 }
 
 mat-toolbar {
-  // border: 1px solid red;
   height: 6.5vh;
   display: grid;
   @include responsiveToolBar;
@@ -32,15 +31,11 @@ mat-toolbar {
     background-color: white;
     border-radius: 10px;
     padding: 1vh;
-    width: 35%;
+    width: 50%;
     position: relative;
     bottom: 55%;
     font-size: 2vh;
     margin: auto;
-
-    .win-count-text {
-      font-size: 1.5vh;
-    }
   }
 }
 

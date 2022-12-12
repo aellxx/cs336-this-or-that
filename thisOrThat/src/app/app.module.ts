@@ -24,6 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
+import { HomePageComponent } from './pages/home-page/home-page.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     PhotoContainerComponent,
     UploaderComponent,
     ConfirmDialogComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,

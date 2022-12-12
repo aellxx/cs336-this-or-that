@@ -41,6 +41,10 @@ export class GamePageComponent implements OnInit {
     // get the route parameter
     this.gameVersion = <string>this.actRt.snapshot.paramMap.get('gameName');
 
+    // if invalid parameter, redirect to home
+    if (!dataSvc.gameNames.find((item) => item === this.gameVersion)) {
+      this.router.navigateByUrl('home');
+    }
     // get the images from firestore and set up the first pair to render on screen 
     this.dataSvc.getFireStoreData(this.gameVersion).subscribe((res) => {
       this.imageArr = res;

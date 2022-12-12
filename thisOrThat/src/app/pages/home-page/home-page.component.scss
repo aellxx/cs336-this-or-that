@@ -22,6 +22,7 @@
   grid-template-rows: 2fr 0.5fr 1fr 3fr;
   row-gap: 1vh;
 }
+
 .game-title {
   position: relative;
   font-family: "Press Start 2P";
@@ -45,15 +46,15 @@
 
 .mat-mdc-unelevated-button.mat-primary {
   background-color: #00303b;
-  font-size: 1vw;
-  width: 70%;
+  font-size: .75rem;
+  width: 80%;
 }
 
 .mat-mdc-unelevated-button.mat-secondary {
   background-color: #164c59;
   color: white;
-  font-size: 1vw;
-  width: 70%;
+  font-size: .75rem;
+  width: 80%;
 }
 
 .custom-button {
@@ -64,5 +65,5 @@
   background-color: #8fb8c3;
   width: 70%;
   margin: auto;
-  font-size: 0.8vw;
+  font-size: .75rem;
 }
