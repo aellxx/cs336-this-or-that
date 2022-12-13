@@ -9,7 +9,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PhotoContainerComponent } from './components/photo-container/photo-container.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -32,7 +31,6 @@ import { CommonModule } from '@angular/common';
   declarations: [
     AppComponent,
     GamePageComponent,
-    PhotoContainerComponent,
     UploaderComponent,
     ConfirmDialogComponent,
     HomePageComponent,

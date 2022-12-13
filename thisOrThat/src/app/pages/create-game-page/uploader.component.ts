@@ -83,6 +83,9 @@ export class UploaderComponent {
     this.gameExists = (this.gamesLoaded && this.games.includes(gameName)) ? true : false; 
   }
   
+  /**
+   * Upload photos to cloud storage and log update staus
+   */
   startUpload() {
     this.loading = true;
     for (let i = 0; i < this.files.length; i++) {
@@ -93,6 +96,7 @@ export class UploaderComponent {
       // The main task
       this.task = this.storage.upload(path, this.file);
 
+      // storage set up
       const storage = getStorage();
       const storageRef = ref(storage, path)
       const uploadTask = uploadBytesResumable(storageRef, this.file);
@@ -151,6 +155,9 @@ export class UploaderComponent {
     }
   }
 
+  /**
+   * confirmation that images have uploaded
+   */
   confirmDialog(): void {
     const title = "Images were successfully uploaded."
     const message = "Would you like to start the game?";
@@ -166,15 +173,20 @@ export class UploaderComponent {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
+      // if the user wants to play the game right away
       if(this.result === true) {
-        this.router.navigate(['/game', {gameName: this.game_name}]);
+        this.router.navigate(['/game', this.game_name]);
       } else {
+      // otherwise navigate back home
         this.router.navigateByUrl("home");
       }
 
     });
   }
 
+  /**
+   * navigate home
+   */
   goToHomePage() {
     this.router.navigateByUrl("home");
   }

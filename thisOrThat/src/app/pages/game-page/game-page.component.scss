@@ -1,4 +1,4 @@
-@import '_extensions.scss';
+// import responsive design file
 @import '_mixins.scss';
 
 .title {
@@ -10,9 +10,11 @@
   cursor: pointer;
 }
 
+// header styling
 mat-toolbar {
   height: 6.5vh;
   display: grid;
+  // reponsive header
   @include responsiveToolBar;
 }
 
