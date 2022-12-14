@@ -101,39 +101,38 @@ export class UploaderComponent {
       const storageRef = ref(storage, path)
       const uploadTask = uploadBytesResumable(storageRef, this.file);
 
-
       uploadTask.on("state_changed",
-      (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
-            break;
-          case 'running':
-            console.log('Upload is running');
-            break;
-        }
-      }, 
-      (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-          case 'storage/canceled':
-            // User canceled the upload
-            break;
-    
-          // ...
-    
-          case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
-      }, 
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        },
+        (error) => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+      
+            // ...
+      
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        }, 
         async () => {
           // get download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -144,28 +143,28 @@ export class UploaderComponent {
               "winCount": 0
             }, { merge : true });
             this.uploaded_num = this.uploaded_num + 1;
-            console.log(this.uploaded_num);
+            console.log("uploaded_num: ", this.uploaded_num);
             if (this.uploaded_num === 16) {
               this.loading = false;
               this.confirmDialog();
-            }
+            }    
           })
         }
-      )      
+      )  
     }
+
   }
 
   /**
    * confirmation that images have uploaded
    */
   confirmDialog(): void {
-    const title = "Images were successfully uploaded."
-    const message = "Would you like to start the game?";
-    const no_bool = true;
+    const title = "Game was successfully created."
+    const message = "Would you like to go to Main page?";
+    const no_bool = false;
     const yes_bool = true;
 
     const dialogData = new ConfirmDialogModel(title, message, no_bool, yes_bool);
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
       data: dialogData
@@ -174,13 +173,10 @@ export class UploaderComponent {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       // if the user wants to play the game right away
+      this.router.navigateByUrl("home");
       if(this.result === true) {
-        this.router.navigate(['/game', this.game_name]);
-      } else {
-      // otherwise navigate back home
         this.router.navigateByUrl("home");
       }
-
     });
   }
 

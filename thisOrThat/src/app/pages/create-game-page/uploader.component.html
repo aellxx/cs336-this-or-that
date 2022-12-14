@@ -38,7 +38,6 @@
 <ngx-dropzone class="upload-dropzone" (change)="onSelect($event)" [expandable]="true" accept="image/jpeg,image/jpg,image/png" [disabled]="loading">
 	<ngx-dropzone-label>Drop 16 images here</ngx-dropzone-label>
 	<ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
 	</ngx-dropzone-image-preview>
 </ngx-dropzone>
 
