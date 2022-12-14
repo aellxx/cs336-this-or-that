@@ -7,12 +7,16 @@
 <div class="game-title-container">
     <mat-form-field>
         <mat-label class="game-title">Title of the game</mat-label>
-        <input matInput placeholder="ex. Norman-Web" [(ngModel)]="game_name" maxlength="15" minlength="1">
+        <input matInput placeholder="ex. Norman-Web" [ngModel]="game_name" (ngModelChange)="checkDuplicateGame($event)" maxlength="15" minlength="1">
     </mat-form-field>
+    <div class="warning-msg-container" >
+        <span class="warning-msg" *ngIf="gameExists">"{{game_name}}" already exists. Please choose another name</span>
+        
+    </div>
 </div>
 
 <div class="upload-button-container">
-    <button mat-raised-button color="primary" (click)="uploadImages()" [disabled]="loading">Upload Images</button>
+    <button mat-raised-button color="primary" (click)="uploadImages()" [disabled]="loading || gameExists">Upload Images</button>
 </div>
 
 <div class="curr_images">

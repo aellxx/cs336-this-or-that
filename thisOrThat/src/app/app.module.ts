@@ -9,7 +9,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PhotoContainerComponent } from './components/photo-container/photo-container.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,13 +24,13 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     GamePageComponent,
-    PhotoContainerComponent,
     UploaderComponent,
     ConfirmDialogComponent,
     HomePageComponent,
@@ -53,6 +52,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MatListModule,
     MatDialogModule,
     MatProgressBarModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
